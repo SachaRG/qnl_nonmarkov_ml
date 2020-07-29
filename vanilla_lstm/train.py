@@ -25,7 +25,7 @@ prep_state = "+Y" # Prep state, VERY IMPORTANT
 
 # last_timestep determines the length of trajectories used for training in units of strong_ro_dt.
 # Must be <= the last strong readout point
-file_prefix = "test_data_3"
+file_prefix = "test_data"
 f = h5py.File(filepath + "/" + file_prefix + "X" + ".h5", 'r')
 
 last_timestep = f["parameters"]["N_time_groups"][()]

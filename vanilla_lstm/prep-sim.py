@@ -14,7 +14,7 @@ dark_mode_compatible(dark_mode_color=r'#86888A')
 # NOTE: Note that most of the settings below must be equal to the settings in prep.py
 # Path that contains the training/validation dataset.
 filepath = "data_sim"
-file_prefix = "test_data_3"
+file_prefix = "test_data"
 # last_timestep determines the length of trajectories used for training in units of strong_ro_dt.
 # Must be <= the last strong readout point
 
@@ -66,7 +66,7 @@ num_features = 2 # I and Q
 
 # Get the expectation value from the data containers for each measurement axis.
 Tm, expX, expY, expZ = data_analysis.plot_average_trajectories(dX, dY, dZ,
-                                                               timesteps=np.arange(0, last_timestep+1),
+                                                               timesteps=np.arange(1, last_timestep+1),
                                                                fit_curves=[],
                                                                artificial_detuning=False,
                                                                savepath=None)
@@ -74,7 +74,6 @@ expX = np.array(expX)
 expY = np.array(expY)
 expZ = np.array(expZ)
 
-dt = dZ['t_0']['integration_time']
 timesteps = range(1, last_timestep+1)
 tfinal = dZ[f't_{timesteps[-1]}']['Tm']
 
