@@ -4,8 +4,8 @@ import tensorflow as tf
 from rich.console import Console
 console = Console()
 
-sys.path.append(r"/home/qnl/Git-repositories")
-from qnl_trajectories import data_analysis
+sys.path.append(r"/Users/sachagreenfield/Desktop/GitHub/")
+from qnl_trajectories.analysis import data_analysis
 from utils import *
 from vanilla_lstm import *
 
@@ -13,7 +13,7 @@ dark_mode_compatible(dark_mode_color=r'#86888A')
 
 # NOTE: Note that most of the settings below must be equal to the settings in prep.py
 # Path that contains the training/validation dataset.
-filepath = r"data/cts_rabi_amp_6/prep_Y"
+filepath = r"data/cts_rabi_amp_0/prep_Y"
 # last_timestep determines the length of trajectories used for training in units of strong_ro_dt.
 # Must be <= the last strong readout point
 last_timestep = 39

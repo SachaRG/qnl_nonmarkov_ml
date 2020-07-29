@@ -19,22 +19,26 @@ tf.debugging.set_log_device_placement(False)
 
 # NOTE: Note that most of the settings below must be equal to the settings in prep.py
 # Path that contains the training/validation dataset.
-filepath = r"data/cts_rabi_amp_6/prep_Y"
+# filepath = r"data/cts_rabi_amp_6/prep_Y"
+filepath = r"data_sim"
 prep_state = "+Y" # Prep state, VERY IMPORTANT
 
 # last_timestep determines the length of trajectories used for training in units of strong_ro_dt.
 # Must be <= the last strong readout point
-last_timestep = 39
-mask_value = -1.0 # This is the mask value for the data, not the missing labels
-total_epochs = 20 # Number of epochs for the training
-mini_batch_size = 1024 # Batch size
+file_prefix = "test_data_3"
+f = h5py.File(filepath + "/" + file_prefix + "X" + ".h5", 'r')
+
+last_timestep = f["parameters"]["N_time_groups"][()]
+mask_value = -1 # This is the mask value for the data, not the missing labels
+total_epochs = 4 # 20 # Number of epochs for the training
+mini_batch_size = 200 # 1024 # Batch size
 lstm_neurons = 32 # Depth of the LSTM layer
-strong_ro_dt = 200e-9 # Time interval for strong readout in the dataset in seconds
+strong_ro_dt = f["parameters"]["sro_Δt"][()] # Time interval for strong readout in the dataset in seconds
 
 rabi_amp = os.path.split(os.path.split(filepath)[0])[1]
 experiment_name = f"{rabi_amp}_prep_{prep_state}"
 # This is where the trained trajectories will be saved to
-model_savepath = r"analysis/rabi_amp_sweep"
+model_savepath = r"analysis/sim_test"
 
 # Load the data prepaired in prep.py
 with h5py.File(os.path.join(filepath, 'training_validation_split.h5'), "r") as f:
